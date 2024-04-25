@@ -1,19 +1,28 @@
 package com.example;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class AppTest 
 {
+    WebDriver driver;
+
+    @BeforeTest
+    public void setUp() {
+        WebDriverManager.edgedriver().setup();
+        driver = new EdgeDriver();
+    }
+
     @Test
     public void shouldAnswerWithTrue() throws InterruptedException
     {
-        WebDriverManager.edgedriver().setup();
-        WebDriver driver = new EdgeDriver();
         String path1 = "https://www.moneycontrol.com/";
 
         //opening
@@ -54,7 +63,11 @@ public class AppTest
          
          System.out.println(dt);
          System.out.println(amt);
-         // driver.quit();
+    }
 
+    @AfterTest
+    public void tearDown() {
+        driver.quit();
     }
 }
+
